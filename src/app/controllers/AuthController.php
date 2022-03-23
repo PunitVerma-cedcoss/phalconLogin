@@ -102,12 +102,13 @@ class AuthController extends Controller
                     }
                     header("location:/index");
                 } else {
-                    $response = new Response();
-                    $response->setStatusCode(403, 'Error');
-                    $response->setContent("Hey, the login details doesn't exist");
-                    $response->send();
+                    // $response = new Response();
+                    // $response->setStatusCode(403, 'Error');
+                    // $response->setContent("Hey, the login details doesn't exist");
+                    // $response->send();
                     // echo "incorrect creds";
-                    $this->view->message = "403 email/password is incorrect";
+                    // $this->view->message = "403 email/password is incorrect";
+                    header("location:/error");
                 }
                 // die();
             }
