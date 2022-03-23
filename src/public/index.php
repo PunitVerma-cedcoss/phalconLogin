@@ -10,6 +10,8 @@ use Phalcon\Mvc\Application;
 use Phalcon\Url;
 use Phalcon\Db\Adapter\Pdo\Mysql;
 use Phalcon\Config;
+use Phalcon\Session\Manager;
+use Phalcon\Session\Adapter\Stream;
 
 $config = new Config([]);
 
@@ -49,33 +51,60 @@ $container->set(
     }
 );
 
+$container->set(
+    'session',
+    function () {
+        $session = new Manager();
+        $files = new Stream(
+            [
+                'savePath' => '/tmp'
+            ]
+        );
+        $session->setAdapter($files)->start();
+        return $session;
+    }
+);
+
 $application = new Application($container);
 
 
+// setting encryption key
+$container->set('crypt', function () {
+    $crypt = new Phalcon\Crypt();
+    $crypt->setKey('someSuperSecretKey');
+    return $crypt;
+});
+$container->set('cookies', function () {
+    $cookies = new Phalcon\Http\Response\Cookies();
+    $cookies->useEncryption(true);
+    return $cookies;
+});
 
-// $container->set(
-//     'db',
-//     function () {
-//         return new Mysql(
-//             [
-//                 'host'     => 'localhost',
-//                 'username' => 'root',
-//                 'password' => '',
-//                 'dbname'   => 'phalt',
-//                 ]
-//             );
-//         }
-// );
 
 $container->set(
-    'mongo',
+    'db',
     function () {
-        $mongo = new MongoClient();
-
-        return $mongo->selectDB('phalt');
-    },
-    true
+        return new Mysql(
+            [
+                'host'     => 'mysql-server',
+                'username' => 'root',
+                'password' => 'secret',
+                'dbname'   => 'test',
+            ]
+        );
+    }
 );
+
+
+// $container->set(
+//     'mongo',
+//     function () {
+//         $mongo = new MongoClient();
+
+//         return $mongo->selectDB('phalt');
+//     },
+//     true
+// );
 
 try {
     // Handle the request

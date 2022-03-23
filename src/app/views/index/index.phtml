@@ -1,10 +1,5 @@
-<?php
-
-echo "<h1>Hello World</h1>";
-
-echo PHP_EOL;
-
-echo $this->tag->linkTo(
-    'signup',
-    'Sign Up Here!'
-);
+<div class="h-screen capitalize w-screen flex justify-center items-center flex-col">
+    <p class="text-6xl font-bold"><?php echo date("m-d-Y h:i:s"); ?></p>
+    <h1>this is authorized dashboard</h1>
+    <a href="auth/logout" class="text-pink-500 underline">Logout</a>
+</div>
