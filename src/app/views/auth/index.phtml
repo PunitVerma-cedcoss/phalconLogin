@@ -1,0 +1,35 @@
+<section class="h-screen w-screen flex justify-center items-center flex-col">
+    <form action="/auth/" method="post" class="capitalize text-slate-600 flex justify-center items-center flex-col">
+        <label for="icon" class="bg-gradient-to-tl from-indigo-500 to-cyan-600 via-blue-600 bg-clip-text text-transparent">
+            <i class="fa fa-fire text-9xl"></i>
+        </label>
+        <label for="email" class="mt-2">
+            <p><i class="fa fa-envelope-open bg-gradient-to-tl from-indigo-500 to-cyan-600  bg-clip-text text-transparent"></i> email</p>
+            <input type="email" name="email" id="email" placeholder="email" class="border-2 border-stone-700 rounded-sm mt-2" required>
+        </label>
+        <label for="password" class="mt-2">
+            <p><i class="fa fa-lock bg-gradient-to-tl from-indigo-500 to-cyan-600  bg-clip-text text-transparent"></i> password</p>
+            <input type="password" name="password" id="password" placeholder="password" class="border-2 border-stone-700 rounded-sm mt-2" required>
+        </label>
+        <div class="form-check pt-3 flex justify-start w-full px-2">
+            <input name="remember" class="form-check-input appearance-none border border-gray-300 rounded-sm bg-white checked:bg-cyan-600 checked:border-cyan-600 focus:outline-none transition duration-200 mt-1 align-top mr-2 cursor-pointer" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label inline-block" for="flexCheckDefault">
+                remember me
+            </label>
+        </div>
+        <label for="submit" class="w-full my-4">
+            <input type="submit" value="Login" name="submit" id="name" class="w-full p-2 rounded-sm shadow-md cursor-pointer text-white bg-gradient-to-r from-indigo-500 to-cyan-600 ">
+        </label>
+        <?php
+        if (isset($message)) {
+        ?>
+            <p class="text-red-500 font-medium bg-green-200 w-full p-3 rounded-sm text-center">
+                <?php
+                echo $message;
+                ?>
+            </p>
+        <?php
+        }
+        ?>
+    </form>
+</section>
