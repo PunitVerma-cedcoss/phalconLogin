@@ -67,7 +67,7 @@ $container->set(
 
 $application = new Application($container);
 
-
+// cookies setup 🍪
 // setting encryption key
 $container->set('crypt', function () {
     $crypt = new Phalcon\Crypt();
@@ -78,6 +78,10 @@ $container->set('cookies', function () {
     $cookies = new Phalcon\Http\Response\Cookies();
     $cookies->useEncryption(true);
     return $cookies;
+});
+
+$container->set('curretTime', function () {
+    return date("m-d-Y h:i:s");
 });
 
 
